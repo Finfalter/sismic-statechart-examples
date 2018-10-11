@@ -1,0 +1,25 @@
+statechart:
+  name: Window Lifter
+  preamble: |
+    request = "NONE"
+  root state:
+    name: active
+    initial: NO_WINDOW_APPROVAL
+    states:
+    - name: NO_WINDOW_APPROVAL
+      transitions:
+        - target: WINDOW_APPROVAL
+          event: windowApprovalOnChange
+          guard: event.hasWindowApproval == True
+    - name: WINDOW_APPROVAL
+      transitions:
+        - target: WINDOW_APPROVAL
+          event: moveRequest
+          action: |
+            request = event.request
+            send('moveCommand',command=request)
+        - target: NO_WINDOW_APPROVAL
+          event: windowApprovalOnChange
+          guard: event.hasWindowApproval == False
+          action: |
+            send('moveCommand',command="NONE")
