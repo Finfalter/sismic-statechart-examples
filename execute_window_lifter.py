@@ -8,7 +8,7 @@ def print_all():
 	for attribute in ['event', 'transitions', 'entered_states', 'exited_states', 'sent_events']:
 		print('{}: {}'.format(attribute, getattr(step, attribute)))
 
-with open('C:\\Users\\Q443952\\entwicklung\\window_lifter.yaml') as f:
+with open('.\\window_lifter.yaml') as f:
 	statechart = import_from_yaml(f)
 	assert isinstance(statechart, Statechart)
 	
@@ -32,12 +32,5 @@ with open('C:\\Users\\Q443952\\entwicklung\\window_lifter.yaml') as f:
 
 	interpreter.queue('windowApprovalOnChange', hasWindowApproval=False)
 	step = interpreter.execute()
-	# the following line is not possible, why?
-	#assert event_is_fired(step, 'moveCommand', 'command')
-	assert event_is_fired(step, 'moveCommand')
+	assert event_is_fired(step, 'moveCommand', {'command': 'NONE'})
 	print(interpreter.configuration)
-	
-	#print('Window Moving== ', interpreter.context['windowIsMoving'])
-
-	
-	

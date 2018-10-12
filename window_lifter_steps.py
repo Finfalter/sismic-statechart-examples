@@ -15,3 +15,4 @@ map_assertion('command is sent to close the window', 'Event moveCommand is fired
 map_assertion('command is sent to stop the window', 'Event moveCommand is fired with command="NONE"')
 
 map_assertion('nothing happens', 'Event moveCommand is not fired')
+

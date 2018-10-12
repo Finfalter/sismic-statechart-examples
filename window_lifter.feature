@@ -1,12 +1,14 @@
 Feature: Service Window Lifter
 
- Scenario: No window movement without window approval
+ Scenario Outline: No window movement without window approval
 	Given I do not grant window approval
-    When I send event moveRequest
-		| parameter  | value  |
-		| requenst   | "OPEN" |
-		| request    | "CLOSE"|
+    When I send event moveRequest with request=<movement>
     Then nothing happens
+    
+    Examples:
+    | movement |
+    | "OPEN"   |
+    | "CLOSE"  |
 	
  Scenario: Open the window
 	Given I grant window approval
@@ -18,14 +20,16 @@ Feature: Service Window Lifter
     When I try to close the window
     Then command is sent to close the window
 	
- Scenario: Stop the window
+ Scenario Outline: Stop the window
 	Given I grant window approval
-    AND  I send event moveRequest 
-    	| parameter  | value  |
-		| requenst   | "OPEN" |
-		| request    | "CLOSE"|
+    AND  I send event moveRequest with request=<movement>
     When I try to stop any window movement
     Then command is sent to stop the window
+    
+    Examples:
+    | movement |
+    | "OPEN"   |
+    | "CLOSE"  |
     
  Scenario: Move requests are itempotent
 	Given I grant window approval
