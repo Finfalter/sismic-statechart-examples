@@ -1,9 +1,10 @@
+# sismic-bdd window_lifter.yaml --steps window_lifter_steps.py --features window_lifter.feature
+
 from sismic.bdd import map_action, map_assertion
 
 map_action('I do not grant window approval',    'I do nothing')
 map_action('I grant window approval',    'I send event windowApprovalOnChange with hasWindowApproval=True')
 map_action('I withdraw window approval', 'I send event windowApprovalOnChange with hasWindowApproval=False')
-
 
 map_action('I try to open the window',          'I send event moveRequest with request="OPEN"')
 map_action('I try to close the window',         'I send event moveRequest with request="CLOSE"')

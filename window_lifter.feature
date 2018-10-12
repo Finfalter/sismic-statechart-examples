@@ -27,13 +27,13 @@ Feature: Service Window Lifter
     When I try to stop any window movement
     Then command is sent to stop the window
     
- Scenario: Move Request "open the window" is itempotent
+ Scenario: Move requests are itempotent
 	Given I grant window approval
     AND  I try to open the window
     When I try to open the window
     Then command is sent to open the window
     
- Scenario: Stop the window when window approval is withdrawn
+ Scenario: Window is stopped when window approval is withdrawn
 	Given I grant window approval
     When  I withdraw window approval
     Then command is sent to stop the window
